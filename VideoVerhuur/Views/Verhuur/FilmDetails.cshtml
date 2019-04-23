@@ -1,0 +1,56 @@
+﻿@model VideoVerhuur.Models.FilmDetailViewModel
+
+@{
+    ViewBag.Title = "FilmDetails";
+}
+
+<h2>@Model.Genre.GenreSoort</h2>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-8">
+            <table class="table table-striped">
+                <tr>
+                    <th class="col-xs-3">
+                        Titel
+                    </th>
+                    <th class="col-xs-3 text-center">
+                        Prijs
+
+                    </th>
+                    <th class="col-xs-3 text-center">
+                        In Voorraad
+                    </th>
+                    <th class="col-xs-3">
+                        Huren
+                    </th>
+                </tr>
+
+                @foreach(var item in Model.Films)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Titel)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Prijs)
+
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.InVoorraad)
+                        </td>
+                        <td>
+                            Huren
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Terug naar genre overzicht", "Index")
+</p>

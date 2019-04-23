@@ -136,6 +136,9 @@
     <Compile Include="Models\Film.cs">
       <DependentUpon>VideoVerhuur.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FilmDetailViewModel.cs" />
+    <Compile Include="Models\FilmProperties.cs" />
+    <Compile Include="Models\FilmUitbreiding.cs" />
     <Compile Include="Models\Genre.cs">
       <DependentUpon>VideoVerhuur.tt</DependentUpon>
     </Compile>
@@ -227,10 +230,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Welkom.cshtml" />
     <Content Include="Views\Home\Foutief.cshtml" />
+    <Content Include="Views\Verhuur\Index.cshtml" />
+    <Content Include="Views\Verhuur\FilmDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Verhuur\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,0 +1,14 @@
+﻿@model List<VideoVerhuur.Models.Genre>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>Klik op het gewenste Genre</h4>
+<ul class="nav nav-pills">
+    @foreach(var genre in Model)
+    {
+        var url = Url.Action("FilmDetails", "Verhuur", new { genreId = genre.GenreNr });
+        <li><a href="@url">@genre.GenreSoort</a></li>
+    }
+</ul>
+
