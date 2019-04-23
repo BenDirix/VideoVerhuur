@@ -146,6 +146,7 @@
     <Compile Include="Models\Klant.cs">
       <DependentUpon>VideoVerhuur.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LogInFormViewModel.cs" />
     <Compile Include="Models\Verhuur.cs">
       <DependentUpon>VideoVerhuur.tt</DependentUpon>
     </Compile>

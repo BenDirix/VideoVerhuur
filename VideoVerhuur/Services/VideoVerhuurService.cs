@@ -8,7 +8,7 @@ namespace VideoVerhuur.Services
 {
     public class VideoVerhuurService
     {
-        public Klant GetKlant(string naam, int postcode)
+        public Klant GetKlant(string naam, int? postcode)
         {
             using(var db = new VideoVerhuurEntities())
             {
