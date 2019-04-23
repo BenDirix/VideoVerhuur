@@ -10,17 +10,17 @@ namespace VideoVerhuur.Controllers
 {
     [UserLoggedInFilter]
     public class VerhuurController : Controller
-    {        
+    {
         private VideoVerhuurService _dbContext = new VideoVerhuurService();
         // GET: Verhuur        
-        
+
         public ActionResult Index()
         {
             var genres = _dbContext.GetGenres();
-            
+
             return View(genres);
         }
-        
+
         public ActionResult FilmDetails(int genreId)
         {
             var filmsVM = new FilmDetailViewModel
@@ -28,9 +28,6 @@ namespace VideoVerhuur.Controllers
                 Films = _dbContext.GetFilms(genreId),
                 Genre = _dbContext.GetGenre(genreId)
             };
-            if(filmsVM.Genre == null)
-                return HttpNotFound();
-
             return View(filmsVM);
         }
 
@@ -51,6 +48,9 @@ namespace VideoVerhuur.Controllers
         }
         public ActionResult WinkelMandje()
         {
+            if(Session["Winkelmandje"] == null)
+                Session["Winkelmandje"] = new List<Film>();
+
             return View();
         }
 
@@ -74,6 +74,9 @@ namespace VideoVerhuur.Controllers
 
         public ActionResult Afrekenen()
         {
+            if(((List<Film>)Session["Winkelmandje"]).Count == 0)
+                return RedirectToAction("Winkelmandje");
+
             var klant = (Klant)Session["Klant"];
             var teHurenFilms = (List<Film>)Session["Winkelmandje"];
             var afrekenenVM = new AfrekenenViewModel

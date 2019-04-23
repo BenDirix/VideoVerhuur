@@ -4,60 +4,68 @@
     ViewBag.Title = "FilmDetails";
 }
 
-<h2>@Model.Genre.GenreSoort</h2>
 
 
-<div class="container">
+@if(Model.Genre == null)
+{
+    <h1>Onbekende Genre</h1>
+}
+else
+{
+    <h2>@Model.Genre.GenreSoort</h2>
+    <div class="container">
 
-    <table class="table-condensed table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>
-                    Titel
-                </th>
-                <th>
-                    Prijs
-
-                </th>
-                <th>
-                    In Voorraad
-                </th>
-                <th class="text-center">
-                    Huren
-                </th>
-            </tr>
-
-        </thead>
-        <tbody>
-            @foreach(var film in Model.Films)
-            {
+        <table class="table-condensed table-striped table-bordered">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => film.Titel)
-                    </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => film.Prijs)
+                    <th>
+                        Titel
+                    </th>
+                    <th>
+                        Prijs
 
-                    </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => film.InVoorraad)
-                    </td>
-                    <td class="text-center">
-                        @if(film.InVoorraad != 0)
-                        {
-                            using(Html.BeginForm("Huren", "Verhuur", new { id = film.BandNr }))
-                            {
-                                <input class="btn-link" type="submit" value="Huren" />
-                            }
-                        }
-
-                    </td>
+                    </th>
+                    <th>
+                        In Voorraad
+                    </th>
+                    <th class="text-center">
+                        Huren
+                    </th>
                 </tr>
-            }
-        </tbody>
 
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach(var film in Model.Films)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => film.Titel)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => film.Prijs)
+
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => film.InVoorraad)
+                        </td>
+                        <td class="text-center">
+                            @if(film.InVoorraad != 0)
+                            {
+                                using(Html.BeginForm("Huren", "Verhuur", new { id = film.BandNr }))
+                                {
+                                    <input class="btn-link" type="submit" value="Huren" />
+                                }
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+}
 
 <p>
     @Html.ActionLink("Terug naar genre overzicht", "Index")
