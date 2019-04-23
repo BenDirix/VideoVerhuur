@@ -1,15 +1,13 @@
-﻿@model VideoVerhuur.Models.FilmDetailViewModel
-
+﻿@using VideoVerhuur.Models
 @{
-    ViewBag.Title = "FilmDetails";
+    ViewBag.Title = "WinkelMandje";
 }
 
-<h2>@Model.Genre.GenreSoort</h2>
-
+<h2>WinkelMandje</h2>
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-7">            
+        <div class="col-xs-7">
             <table class="table table-striped">
                 <tr>
                     <th class="col-xs-3">
@@ -19,15 +17,12 @@
                         Prijs
 
                     </th>
-                    <th class="col-xs-2 text-center">
-                        In Voorraad
-                    </th>
                     <th class="col-xs-1 text-center">
-                        Huren
+                        Verwijderen
                     </th>
                 </tr>
 
-                @foreach(var film in Model.Films)
+                @foreach(var film in (List<Film>)Session["Winkelmandje"])
                 {
                     <tr>
                         <td>
@@ -38,14 +33,11 @@
 
                         </td>
                         <td class="text-center">
-                            @Html.DisplayFor(modelItem => film.InVoorraad)
-                        </td>
-                        <td class="text-center">
                             @if(film.InVoorraad != 0)
                             {
-                                using(Html.BeginForm("Winkelmandje","Verhuur", new { id = film.BandNr }))
+                                using(Html.BeginForm("Verwijderen", "Verhuur", new { id = film.BandNr }))
                                 {
-                                    <input class="btn-link" type="submit" value="Huren" />
+                                    <input class="btn-link" type="submit" value="Verwijderen" />
                                 }
                             }
 
@@ -54,10 +46,8 @@
                 }
 
             </table>
+            @Html.ActionLink("Verder winkelen", "Index", "Verhuur")
         </div>
     </div>
 </div>
 
-<p>
-    @Html.ActionLink("Terug naar genre overzicht", "Index")
-</p>

@@ -12,7 +12,7 @@ namespace VideoVerhuur.Services
         {
             using(var db = new VideoVerhuurEntities())
             {
-                return db.Klanten.Where(k => k.Naam == naam && k.PostCode == postcode).FirstOrDefault();
+                return db.Klanten.SingleOrDefault(k => k.Naam == naam && k.PostCode == postcode);
             }
         }
 
@@ -35,6 +35,13 @@ namespace VideoVerhuur.Services
             using(var db = new VideoVerhuurEntities())
             {
                 return db.Films.Where(f => f.GenreNr == genreId).OrderBy(f => f.Titel).ToList();
+            }
+        }
+        public Film GetFilm(int id)
+        {
+            using(var db = new VideoVerhuurEntities())
+            {
+                return db.Films.SingleOrDefault(f => f.BandNr == id);
             }
         }
     }

@@ -232,6 +232,7 @@
     <Content Include="Views\Home\Foutief.cshtml" />
     <Content Include="Views\Verhuur\Index.cshtml" />
     <Content Include="Views\Verhuur\FilmDetails.cshtml" />
+    <Content Include="Views\Verhuur\WinkelMandje.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
