@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VideoVerhuur.Controllers;
 
 namespace VideoVerhuur
 {
@@ -10,12 +11,16 @@ namespace VideoVerhuur
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if(HttpContext.Current.Session != null)
+            HttpContext ctx = HttpContext.Current;
+            if(ctx.Session != null)
             {
-                if(HttpContext.Current.Session["klant"] == null)
+                if(ctx.Session["klant"] == null)
                 {
-                    filterContext.Result = new RedirectToRouteResult(
-                       new System.Web.Routing.RouteValueDictionary { { "Controller", "Home" }, { "Action", "Index" } });
+                    ctx.Response.Redirect("~/Home/Index");
+                    //filterContext.Result = new RedirectToRouteResult(
+                    //  new System.Web.Routing.RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } });
+                    //var controller = (HomeController)filterContext.Controller;
+                    //filterContext.Result = controller.RedirectToAction("Index", "Home");
                 }
 
             }

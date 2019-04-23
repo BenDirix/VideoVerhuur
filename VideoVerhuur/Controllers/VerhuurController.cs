@@ -10,23 +10,19 @@ namespace VideoVerhuur.Controllers
 {
     [UserLoggedInFilter]
     public class VerhuurController : Controller
-    {
+    {        
         private VideoVerhuurService _dbContext = new VideoVerhuurService();
-        // GET: Verhuur
+        // GET: Verhuur        
+        
         public ActionResult Index()
         {
-            //if(Session["klant"] == null)
-            //    return RedirectToAction("Index", "Home");
             var genres = _dbContext.GetGenres();
             
             return View(genres);
         }
-
+        
         public ActionResult FilmDetails(int genreId)
         {
-            //if(Session["klant"] == null)
-            //    return RedirectToAction("Index", "Home");
-
             var filmsVM = new FilmDetailViewModel
             {
                 Films = _dbContext.GetFilms(genreId),
@@ -40,9 +36,6 @@ namespace VideoVerhuur.Controllers
 
         public ActionResult Huren(int id)
         {
-            //if(Session["klant"] == null)
-            //    return RedirectToAction("Index", "Home");
-
             List<Film> winkelmandje = new List<Film>();
             if(Session["Winkelmandje"] != null)
                 winkelmandje = (List<Film>)Session["Winkelmandje"];
