@@ -6,7 +6,7 @@
 }
 
 <h2>WinkelMandje</h2>
-@if(Session["Winkelmandje"] != null)
+@if(((List<Film>)Session["Winkelmandje"]).Count != 0)
 {
     <div class="container">
         <table class="table-condensed table-striped table-bordered">
@@ -47,5 +47,6 @@
 else
 {
     <p>U heeft geen films in uw winkelmandje!</p>
+    @Html.ActionLink("Terug naar genre overzicht", "Index", "Verhuur")
 }
 
