@@ -1,53 +1,51 @@
 ﻿@using VideoVerhuur.Models
 @{
+    /**/
+
     ViewBag.Title = "WinkelMandje";
 }
 
 <h2>WinkelMandje</h2>
+@if(Session["Winkelmandje"] != null)
+{
+    <div class="container">
+        <table class="table-condensed table-striped table-bordered">
+            <tr>
+                <th>
+                    Titel
+                </th>
+                <th class="text-center">
+                    Prijs
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-7">
-            <table class="table table-striped">
+                </th>
+                <th class="text-center">
+                    Verwijderen
+                </th>
+            </tr>
+
+            @foreach(var film in (List<Film>)Session["Winkelmandje"])
+            {
                 <tr>
-                    <th class="col-xs-3">
-                        Titel
-                    </th>
-                    <th class="col-xs-2 text-center">
-                        Prijs
+                    <td>
+                        @Html.DisplayFor(modelItem => film.Titel)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => film.Prijs)
 
-                    </th>
-                    <th class="col-xs-1 text-center">
-                        Verwijderen
-                    </th>
+                    </td>
+                    <td class="text-center">
+                        @Html.ActionLink("Verwijderen", "Verwijderen", new { id = film.BandNr })
+                    </td>
                 </tr>
+            }
 
-                @foreach(var film in (List<Film>)Session["Winkelmandje"])
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => film.Titel)
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => film.Prijs)
-
-                        </td>
-                        <td class="text-center">
-                            @if(film.InVoorraad != 0)
-                            {
-                                using(Html.BeginForm("Verwijderen", "Verhuur", new { id = film.BandNr }))
-                                {
-                                    <input class="btn-link" type="submit" value="Verwijderen" />
-                                }
-                            }
-
-                        </td>
-                    </tr>
-                }
-
-            </table>
-            @Html.ActionLink("Verder winkelen", "Index", "Verhuur")
-        </div>
+        </table>
+        @Html.ActionLink("Verder winkelen", "Index", "Verhuur")
     </div>
-</div>
+
+}
+else
+{
+    <p>U heeft geen films in uw winkelmandje!</p>
+}
 

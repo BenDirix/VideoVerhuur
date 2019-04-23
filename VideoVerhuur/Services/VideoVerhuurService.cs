@@ -44,5 +44,21 @@ namespace VideoVerhuur.Services
                 return db.Films.SingleOrDefault(f => f.BandNr == id);
             }
         }
+        public void AddVerhuur(List<Verhuur> verhuurLijst)
+        {
+            using(var db = new VideoVerhuurEntities())
+            {
+                foreach(var verhuur in verhuurLijst)
+                {
+                    var film = db.Films.Single(f => f.BandNr == verhuur.BandNr);
+                    film.InVoorraad -= 1;
+                    film.TotaalVerhuurd += 1;
+                    film.UitVoorraad += 1;
+                    db.Verhuur.Add(verhuur);
+                }
+                    
+                db.SaveChanges();
+            }
+        }
     }
 }

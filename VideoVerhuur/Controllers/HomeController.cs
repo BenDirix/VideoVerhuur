@@ -11,10 +11,6 @@ namespace VideoVerhuur.Controllers
     public class HomeController : Controller
     {
         private VideoVerhuurService _dbContext = new VideoVerhuurService();
-        public HomeController()
-        {
-
-        }
         public ActionResult Index()
         {
             Session.Clear();
@@ -35,13 +31,19 @@ namespace VideoVerhuur.Controllers
             return View();
         }
         
-        public ActionResult Bevestiging(string naam, int postcode)
+        public ActionResult Aanmelden(string naam, int postcode = 0)
         {
             var klant = _dbContext.GetKlant(naam.ToUpper(), postcode);
             Session["klant"] = klant;
             if(klant == null)
                 return View("Foutief");
             return View("Welkom");
+        }
+
+        public ActionResult Uitloggen()
+        {
+            Session.Clear();
+            return RedirectToAction("Index");
         }
     }
 }

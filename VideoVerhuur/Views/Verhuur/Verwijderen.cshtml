@@ -1,0 +1,15 @@
+﻿@model VideoVerhuur.Models.Film
+@{
+    ViewBag.Title = "Verwijderen";
+}
+
+<h2>Verwijder gehuurde film</h2>
+<p>Ben je zeker dat je "@Model.Titel" niet wil huren?</p>
+<div>
+    @using(Html.BeginForm("VerwijderenBevestiging", "Verhuur", new { id = Model.BandNr }))
+    {
+        <input class="btn-link" type="submit" value="JA" />
+        @Html.ActionLink("NEE", "Winkelmandje")
+    }
+</div>
+

@@ -8,54 +8,55 @@
 
 
 <div class="container">
-    <div class="row">
-        <div class="col-xs-7">            
-            <table class="table table-striped">
+
+    <table class="table-condensed table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Titel
+                </th>
+                <th>
+                    Prijs
+
+                </th>
+                <th>
+                    In Voorraad
+                </th>
+                <th class="text-center">
+                    Huren
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach(var film in Model.Films)
+            {
                 <tr>
-                    <th class="col-xs-3">
-                        Titel
-                    </th>
-                    <th class="col-xs-2 text-center">
-                        Prijs
+                    <td>
+                        @Html.DisplayFor(modelItem => film.Titel)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => film.Prijs)
 
-                    </th>
-                    <th class="col-xs-2 text-center">
-                        In Voorraad
-                    </th>
-                    <th class="col-xs-1 text-center">
-                        Huren
-                    </th>
-                </tr>
-
-                @foreach(var film in Model.Films)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => film.Titel)
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => film.Prijs)
-
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => film.InVoorraad)
-                        </td>
-                        <td class="text-center">
-                            @if(film.InVoorraad != 0)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => film.InVoorraad)
+                    </td>
+                    <td class="text-center">
+                        @if(film.InVoorraad != 0)
+                        {
+                            using(Html.BeginForm("Huren", "Verhuur", new { id = film.BandNr }))
                             {
-                                using(Html.BeginForm("Winkelmandje","Verhuur", new { id = film.BandNr }))
-                                {
-                                    <input class="btn-link" type="submit" value="Huren" />
-                                }
+                                <input class="btn-link" type="submit" value="Huren" />
                             }
+                        }
 
-                        </td>
-                    </tr>
-                }
+                    </td>
+                </tr>
+            }
+        </tbody>
 
-            </table>
-        </div>
-    </div>
+    </table>
 </div>
 
 <p>
