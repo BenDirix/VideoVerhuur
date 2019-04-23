@@ -48,10 +48,5 @@ namespace VideoVerhuur.Controllers
             Session.Clear();
             return RedirectToAction("Index");
         }
-
-        public new RedirectToRouteResult RedirectToAction(string action, string controller)
-        {
-            return base.RedirectToAction(action, controller);
-        }
     }
 }
