@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using VideoVerhuur.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -16,17 +17,30 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("VDAB Movies", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+                <ul class="nav navbar-nav"></ul>
             </div>
         </div>
     </div>
+    <div class="container">
+        <img src="~/images/videoVerhuur.jpg" style="width: 157px" />
+        <hr />
+        @if(Session["klant"] == null)
+        {
+            <p>Eerst aanmelden om te kunnen huren!</p>
+        }
+        else
+        {
+            var klantNaam = $"{((Klant)Session["klant"]).Voornaam} {((Klant)Session["klant"]).Naam}";
+            <p> Welkom, @klantNaam</p>
+        }
+        <div style="padding-bottom: 20px">@Html.ActionLink("Uitloggen en naar beginpagina", "Index")</div>
+
+
+    </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
