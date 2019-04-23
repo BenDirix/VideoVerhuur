@@ -8,27 +8,42 @@ using VideoVerhuur.Models;
 
 namespace VideoVerhuur.Controllers
 {
+    [HandleError]
     [UserLoggedInFilter]
     public class VerhuurController : Controller
     {
         private VideoVerhuurService _dbContext = new VideoVerhuurService();
-        // GET: Verhuur        
-
+        // GET: Verhuur
         public ActionResult Index()
         {
-            var genres = _dbContext.GetGenres();
+            try
+            {
+                var genres = _dbContext.GetGenres();
 
-            return View(genres);
+                return View(genres);
+            }
+            catch
+            {
+                throw new ApplicationException();
+            }
+
         }
 
         public ActionResult FilmDetails(int genreId)
         {
-            var filmsVM = new FilmDetailViewModel
+            try
             {
-                Films = _dbContext.GetFilms(genreId),
-                Genre = _dbContext.GetGenre(genreId)
-            };
-            return View(filmsVM);
+                var filmsVM = new FilmDetailViewModel
+                {
+                    Films = _dbContext.GetFilms(genreId),
+                    Genre = _dbContext.GetGenre(genreId)
+                };
+                return View(filmsVM);
+            }
+            catch
+            {
+                throw new ApplicationException();
+            }
         }
 
         public ActionResult Huren(int id)
@@ -63,7 +78,6 @@ namespace VideoVerhuur.Controllers
         [HttpPost]
         public ActionResult VerwijderenBevestiging(int id)
         {
-            //var teVerwijderenFilm = _dbContext.GetFilm(id);
             var winkelmandje = (List<Film>)Session["Winkelmandje"];
             var teVerwijderenFilm = winkelmandje.SingleOrDefault(f => f.BandNr == id);
             if(teVerwijderenFilm != null)
