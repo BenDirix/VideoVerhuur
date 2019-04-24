@@ -1,9 +1,8 @@
 ﻿@model VideoVerhuur.Models.FilmDetailViewModel
 
 @{
-    ViewBag.Title = "FilmDetails";
+    ViewBag.Title = "Film Details";
 }
-
 
 
 @if(Model.Genre == null)
@@ -18,36 +17,19 @@ else
         <table class="table-condensed table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>
-                        Titel
-                    </th>
-                    <th>
-                        Prijs
-
-                    </th>
-                    <th>
-                        In Voorraad
-                    </th>
-                    <th class="text-center">
-                        Huren
-                    </th>
+                    <th>Titel</th>
+                    <th>Prijs</th>
+                    <th>In Voorraad</th>
+                    <th class="text-center">Huren</th>
                 </tr>
-
             </thead>
             <tbody>
                 @foreach(var film in Model.Films)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => film.Titel)
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => film.Prijs)
-
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => film.InVoorraad)
-                        </td>
+                        <td> @Html.DisplayFor(modelItem => film.Titel)</td>
+                        <td class="text-center">@Html.DisplayFor(modelItem => film.Prijs)</td>
+                        <td class="text-center">@Html.DisplayFor(modelItem => film.InVoorraad)</td>
                         <td class="text-center">
                             @if(film.InVoorraad != 0)
                             {
@@ -56,17 +38,13 @@ else
                                     <input class="btn-link" type="submit" value="Huren" />
                                 }
                             }
-
                         </td>
                     </tr>
                 }
             </tbody>
-
         </table>
     </div>
-
 }
-
 <p>
     @Html.ActionLink("Terug naar genre overzicht", "Index")
 </p>

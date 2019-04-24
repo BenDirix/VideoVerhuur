@@ -18,12 +18,6 @@ namespace VideoVerhuur
                 {
                     ctx.Response.Redirect("~/Home/Index");
 
-                    //filterContext.Result = new RedirectToRouteResult(
-                    //  new System.Web.Routing.RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } });
-
-                    //var controller = (HomeController)filterContext.Controller;
-
-                    //filterContext.Result = controller.RedirectToAction("Index", "Home");
                 }
 
             }

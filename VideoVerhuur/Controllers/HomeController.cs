@@ -13,7 +13,6 @@ namespace VideoVerhuur.Controllers
         private VideoVerhuurService _dbContext = new VideoVerhuurService();
         public ActionResult Index()
         {
-            Session.Clear();
             var loginVM = new LogInFormViewModel();
             return View(loginVM);
         }
@@ -35,10 +34,10 @@ namespace VideoVerhuur.Controllers
         public ActionResult Aanmelden(LogInFormViewModel loginVM)
         {
             if(loginVM.Naam == null || loginVM.Postcode == null)
-                return View("Foutief");
+                return View("FoutieveLogin");
             var user = _dbContext.GetKlant(loginVM.Naam.ToUpper(), loginVM.Postcode);            
             if(user == null)
-                return View("Foutief");
+                return View("FoutieveLogin");
             Session["klant"] = user;
             return View("Welkom");
         }

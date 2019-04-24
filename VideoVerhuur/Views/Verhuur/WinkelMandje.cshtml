@@ -10,35 +10,25 @@
 {
     <div class="container">
         <table class="table-condensed table-striped table-bordered">
-            <tr>
-                <th>
-                    Titel
-                </th>
-                <th class="text-center">
-                    Prijs
-
-                </th>
-                <th class="text-center">
-                    Verwijderen
-                </th>
-            </tr>
-
-            @foreach(var film in (List<Film>)Session["Winkelmandje"])
-            {
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => film.Titel)
-                    </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => film.Prijs)
-
-                    </td>
-                    <td class="text-center">
-                        @Html.ActionLink("Verwijderen", "Verwijderen", new { id = film.BandNr })
-                    </td>
+                    <th>Titel</th>
+                    <th class="text-center"> Prijs</th>
+                    <th class="text-center">Verwijderen</th>
                 </tr>
-            }
-
+            </thead>
+            <tbody>
+                @foreach(var film in (List<Film>)Session["Winkelmandje"])
+                {
+                    <tr>
+                        <td> @Html.DisplayFor(modelItem => film.Titel)</td>
+                        <td class="text-center">@Html.DisplayFor(modelItem => film.Prijs)</td>
+                        <td class="text-center">
+                            @Html.ActionLink("Verwijderen", "Verwijderen", new { id = film.BandNr })
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
         @Html.ActionLink("Verder winkelen", "Index", "Verhuur")
     </div>

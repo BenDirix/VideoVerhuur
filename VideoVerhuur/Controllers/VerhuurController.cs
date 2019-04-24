@@ -85,11 +85,11 @@ namespace VideoVerhuur.Controllers
 
             return RedirectToAction("Winkelmandje");
         }
-
+        [HandleError(View = "AfrekenenError")]
         public ActionResult Afrekenen()
         {
             if(((List<Film>)Session["Winkelmandje"]).Count == 0)
-                return RedirectToAction("Winkelmandje");
+                throw new ApplicationException();
 
             var klant = (Klant)Session["Klant"];
             var teHurenFilms = (List<Film>)Session["Winkelmandje"];
