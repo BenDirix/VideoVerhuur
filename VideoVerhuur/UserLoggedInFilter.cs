@@ -10,16 +10,13 @@ namespace VideoVerhuur
     public class UserLoggedInFilter : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            HttpContext ctx = HttpContext.Current;
-            if(ctx.Session != null)
+        {            
+            if(HttpContext.Current.Session != null)
             {
-                if(ctx.Session["klant"] == null)
+                if(HttpContext.Current.Session["klant"] == null)
                 {
-                    ctx.Response.Redirect("~/Home/Index");
-
+                    HttpContext.Current.Response.Redirect("~/Home/Index");
                 }
-
             }
             base.OnActionExecuting(filterContext);
         }
